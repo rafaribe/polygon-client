@@ -59,7 +59,7 @@ func main() {
 		}
 
 		log.Printf("Latest block number: %s", blockNumberResp.Result)
-		log.Printf("Latest block hash: %s", blockResp.Result)
+		log.Printf("Latest block hash: %s", blockResp.Result.Hash)
 
 		// Wait for 5 seconds before making the next request
 		time.Sleep(time.Second * 5)

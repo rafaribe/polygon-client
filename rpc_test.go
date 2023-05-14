@@ -7,7 +7,7 @@ import (
 	"testing"
 )
 
-func TestRPC_eth_blockNumber(t *testing.T) {
+func TestRPCethBlockNumber(t *testing.T) {
 	server := httptest.NewServer(http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
 		// check the request parameters
 		if r.Method != http.MethodPost {
@@ -45,7 +45,7 @@ func TestRPC_eth_blockNumber(t *testing.T) {
 }
 
 // Meant to express how a mispell in method name would result if calling the Polygon RPC
-func TestRPC_eth_blockNumberMistake(t *testing.T) {
+func TestRPCethBlockNumberMistake(t *testing.T) {
 	server := httptest.NewServer(http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
 		// check the request parameters
 		if r.Method != http.MethodPost {
@@ -110,7 +110,7 @@ func TestRPC_eth_blockNumberMistake(t *testing.T) {
 	}
 }
 
-func TestRPC_eth_getBlockByNumber(t *testing.T) {
+func TestRPCethGetBlockByNumber(t *testing.T) {
 	server := httptest.NewServer(http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
 		// check the request parameters
 		if r.Method != http.MethodPost {
