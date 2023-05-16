@@ -66,7 +66,8 @@ resource "aws_ecs_task_definition" "polygon_client" {
   [
     {
       "name": "polygon-client",
-      "image": "${local.repository_url}
+      "image": "${local.repository_url == "" ? aws_ecr_repository.polygon_client.repository_url : local.repository_url}:latest",
+      
       "logConfiguration": {
         "logDriver": "awslogs",
         "options": {
@@ -137,14 +138,15 @@ resource "aws_lb_target_group" "polygon_client" {
   depends_on = [aws_alb.polygon_client]
 }
 
+// From here on out, it is something that will not be needed in this specific application, however I want to showcase how one application would be exposed to the internet.
+
 resource "aws_alb" "polygon_client" {
   name               = "polygon-client-lb"
   internal           = false
   load_balancer_type = "application"
 
   subnets = [
-    aws_subnet.public_d.id,
-    aws_subnet.public_e.id,
+    aws_subnet.public.id,
   ]
 
   security_groups = [
@@ -184,15 +186,7 @@ resource "aws_alb_listener" "polygon_client_https" {
   }
 }
 
-output "alb_url" {
-  value = "http://${aws_alb.polygon_client.dns_name}"
-}
-
 resource "aws_acm_certificate" "polygon_client" {
   domain_name       = "polygon-client.jimmysawczuk.net"
   validation_method = "DNS"
-}
-
-output "domain_validations" {
-  value = aws_acm_certificate.polygon_client.domain_validation_options
 }
