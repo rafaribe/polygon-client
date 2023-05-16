@@ -12,9 +12,9 @@ jobs:
 
       # Install Go on the VM running the action.
       - name: Set up Go
-        uses: actions/setup-go@v2
+        uses: actions/setup-go@v4
         with:
-          go-version: 1.20
+          go-version: 1.20.4
 
       # Install gotestfmt on the VM running the action.
       - name: Set up gotestfmt
